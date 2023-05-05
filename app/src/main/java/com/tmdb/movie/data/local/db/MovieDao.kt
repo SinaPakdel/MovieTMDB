@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MovieDao {
 
-    @Query("select * from movie_table where movie_title like '%' || :searchQuery || '%'")
-    fun getMovies(searchQuery: String): Flow<List<MovieEntity>>
+    @Query("select * from movie_table")
+    fun getSelectedMovies(): Flow<List<MovieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movieEntity: MovieEntity)
