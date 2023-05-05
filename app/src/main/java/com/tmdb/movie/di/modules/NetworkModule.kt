@@ -5,6 +5,7 @@ import com.tmdb.movie.di.qualifier.ApiKey
 import com.tmdb.movie.di.qualifier.BaseUrl
 import com.tmdb.movie.util.api.provideApi
 import com.tmdb.movie.util.consts.Services.API_KEY
+import com.tmdb.movie.util.consts.Services.API_KEY_VALUE
 import com.tmdb.movie.util.consts.Services.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -39,7 +40,7 @@ object NetworkModule {
         val url = chain.request()
             .url
             .newBuilder()
-            .addQueryParameter("api_key", apiKey)
+            .addQueryParameter(API_KEY_VALUE, apiKey)
             .build()
         val request = chain.request()
             .newBuilder()
