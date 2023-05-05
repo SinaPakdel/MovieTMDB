@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class LocalDataSourceImpl @Inject constructor(private val movieDao: MovieDao) : LocalDataSource {
+class LocalDataSourceImpl (private val movieDao: MovieDao) : LocalDataSource {
     override fun getSelectedMovies(): Flow<List<MovieItem>> = flow {
         movieDao.getSelectedMovies().collect { moviesEntity ->
             moviesEntity.asMoviesItem()

@@ -6,14 +6,12 @@ import com.tmdb.movie.data.local.LocalDataSource
 import com.tmdb.movie.data.local.LocalDataSourceImpl
 import com.tmdb.movie.data.local.db.MovieDao
 import com.tmdb.movie.data.local.db.MovieDatabase
-import com.tmdb.movie.di.qualifier.ApiKey
 import com.tmdb.movie.di.qualifier.DatabaseName
 import com.tmdb.movie.util.consts.DataBaseName.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -43,8 +41,4 @@ object DatabaseModule {
     @Provides
     @Singleton
     fun provideLocalDataSource(movieDao: MovieDao): LocalDataSource = LocalDataSourceImpl(movieDao)
-
-//    @Provides
-//    @Singleton
-//    fun provideMovieRepository(movieDataSource: LocalDataSource) = MovieRepository(movieDataSource)
 }

@@ -81,7 +81,6 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-
     @Singleton
     @Provides
     fun provideMovieService(retrofit: Retrofit) = provideApi<MovieService>(retrofit)
