@@ -6,6 +6,8 @@ import com.tmdb.movie.data.local.LocalDataSource
 import com.tmdb.movie.data.local.LocalDataSourceImpl
 import com.tmdb.movie.data.local.db.MovieDao
 import com.tmdb.movie.data.local.db.MovieDatabase
+import com.tmdb.movie.di.qualifier.ApiKey
+import com.tmdb.movie.di.qualifier.DatabaseName
 import com.tmdb.movie.util.consts.DataBaseName.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -20,14 +22,14 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    @Named("databaseName")
+    @DatabaseName
     fun provideDatabaseName(): String = DATABASE_NAME
 
     @Provides
     @Singleton
     fun provideDatabase(
         application: Application,
-        @Named("databaseName") dataBase: String
+        @DatabaseName dataBase: String
     ): MovieDatabase =
         Room.databaseBuilder(application, MovieDatabase::class.java, dataBase)
             .fallbackToDestructiveMigration()

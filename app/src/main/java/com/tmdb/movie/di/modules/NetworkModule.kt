@@ -1,6 +1,8 @@
 package com.tmdb.movie.di.modules
 
 import com.tmdb.movie.data.remote.service.MovieService
+import com.tmdb.movie.di.qualifier.ApiKey
+import com.tmdb.movie.di.qualifier.BaseUrl
 import com.tmdb.movie.util.api.provideApi
 import com.tmdb.movie.util.consts.Services.API_KEY
 import com.tmdb.movie.util.consts.Services.BASE_URL
@@ -22,18 +24,18 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    @Named("apiKey")
+    @ApiKey
     fun provideApiKey(): String = API_KEY
 
     @Provides
     @Singleton
-    @Named("baseUrl")
+    @BaseUrl
     fun provideBaseUrl(): String = BASE_URL
 
 
     @Provides
     @Singleton
-    fun provideInterceptor(@Named("apiKey") apiKey: String): Interceptor = Interceptor { chain ->
+    fun provideInterceptor(@ApiKey apiKey: String): Interceptor = Interceptor { chain ->
         val url = chain.request()
             .url
             .newBuilder()
@@ -70,7 +72,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(
         client: OkHttpClient,
-        @Named("baseUrl") baseUrl: String
+        @BaseUrl baseUrl: String
     ): Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl)
