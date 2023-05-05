@@ -3,7 +3,7 @@ package com.tmdb.movie.model.dto.movies
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class MovieDto(
     @SerializedName("adult")
     val adult: Boolean?,
     @SerializedName("backdrop_path")
