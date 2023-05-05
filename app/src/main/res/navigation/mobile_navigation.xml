@@ -3,23 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/fragmentPopularMovies">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.tmdb.movie.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/fragmentPopularMovies"
+        android:name="com.tmdb.movie.ui.popular_movies.PopularMoviesFragment"
+        android:label="@string/title_popular"
+        tools:layout="@layout/fragment_popular_movies" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.tmdb.movie.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/fragmentUpcomingMovies"
+        android:name="com.tmdb.movie.ui.upcoming_movies.UpcomingMoviesFragment"
+        android:label="@string/title_upcoming"
+        tools:layout="@layout/fragment_upcoming_movies" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.tmdb.movie.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/fragmentSelectedMovies"
+        android:name="com.tmdb.movie.ui.selected_movies.SelectedMoviesFragment"
+        android:label="@string/title_selected"
+        tools:layout="@layout/fragment_selected_movies" />
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.tmdb.movie.ui.movie.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie" /><action android:id="@+id/action_global_movieFragment" app:destination="@id/movieFragment"/>
 </navigation>

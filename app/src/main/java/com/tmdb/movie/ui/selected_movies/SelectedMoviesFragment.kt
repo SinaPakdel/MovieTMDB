@@ -1,4 +1,4 @@
-package com.tmdb.movie.ui.home
+package com.tmdb.movie.ui.selected_movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,14 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.tmdb.movie.databinding.FragmentHomeBinding
+import com.tmdb.movie.databinding.FragmentSelectedMoviesBinding
 
-class HomeFragment : Fragment() {
+class SelectedMoviesFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentSelectedMoviesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,14 +19,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val selectedMoviesViewModel =
+            ViewModelProvider(this).get(SelectedMoviesViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentSelectedMoviesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textNotifications
+        selectedMoviesViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
