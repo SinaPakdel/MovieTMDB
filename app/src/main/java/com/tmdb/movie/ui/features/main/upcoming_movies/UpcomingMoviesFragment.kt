@@ -1,4 +1,4 @@
-package com.tmdb.movie.ui.selected_movies
+package com.tmdb.movie.ui.features.main.upcoming_movies
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.tmdb.movie.databinding.FragmentSelectedMoviesBinding
+import com.tmdb.movie.databinding.FragmentUpcomingMoviesBinding
 
-class SelectedMoviesFragment : Fragment() {
+class UpcomingMoviesFragment : Fragment() {
 
-    private var _binding: FragmentSelectedMoviesBinding? = null
+    private var _binding: FragmentUpcomingMoviesBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -19,14 +19,14 @@ class SelectedMoviesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val selectedMoviesViewModel =
-            ViewModelProvider(this).get(SelectedMoviesViewModel::class.java)
+        val upcomingMoviesViewModel =
+            ViewModelProvider(this).get(UpcomingMoviesViewModel::class.java)
 
-        _binding = FragmentSelectedMoviesBinding.inflate(inflater, container, false)
+        _binding = FragmentUpcomingMoviesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        selectedMoviesViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textDashboard
+        upcomingMoviesViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

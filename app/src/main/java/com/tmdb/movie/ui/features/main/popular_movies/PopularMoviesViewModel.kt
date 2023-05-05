@@ -1,4 +1,4 @@
-package com.tmdb.movie.ui.popular_movies
+package com.tmdb.movie.ui.features.main.popular_movies
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

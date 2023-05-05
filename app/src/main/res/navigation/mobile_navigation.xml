@@ -7,24 +7,25 @@
 
     <fragment
         android:id="@+id/fragmentPopularMovies"
-        android:name="com.tmdb.movie.ui.popular_movies.PopularMoviesFragment"
+        android:name="com.tmdb.movie.ui.features.main.popular_movies.PopularMoviesFragment"
         android:label="@string/title_popular"
         tools:layout="@layout/fragment_popular_movies" />
 
     <fragment
         android:id="@+id/fragmentUpcomingMovies"
-        android:name="com.tmdb.movie.ui.upcoming_movies.UpcomingMoviesFragment"
+        android:name="com.tmdb.movie.ui.features.main.upcoming_movies.UpcomingMoviesFragment"
         android:label="@string/title_upcoming"
         tools:layout="@layout/fragment_upcoming_movies" />
 
     <fragment
         android:id="@+id/fragmentSelectedMovies"
-        android:name="com.tmdb.movie.ui.selected_movies.SelectedMoviesFragment"
+        android:name="com.tmdb.movie.ui.features.main.selected_movies.SelectedMoviesFragment"
         android:label="@string/title_selected"
         tools:layout="@layout/fragment_selected_movies" />
     <fragment
         android:id="@+id/movieFragment"
-        android:name="com.tmdb.movie.ui.movie.MovieFragment"
+        android:name="com.tmdb.movie.ui.features.movie.MovieFragment"
         android:label="fragment_movie"
-        tools:layout="@layout/fragment_movie" /><action android:id="@+id/action_global_movieFragment" app:destination="@id/movieFragment"/>
+        tools:layout="@layout/fragment_movie" />
+    <action android:id="@+id/action_global_movieFragment" app:destination="@id/movieFragment" />
 </navigation>
