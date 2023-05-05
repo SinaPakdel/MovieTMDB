@@ -4,9 +4,8 @@ import com.tmdb.movie.model.dto.Genre
 
 
 data class MovieDetailsItem(
-    val genres: List<Genre>?,
+    val genres: List<GenreItem>?,
     val id: Int?,
-    val imdbId: String?,
     val originalLanguage: String?,
     val originalTitle: String?,
     val overview: String?,
