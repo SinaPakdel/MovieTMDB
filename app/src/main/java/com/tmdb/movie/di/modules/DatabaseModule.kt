@@ -42,6 +42,7 @@ object DatabaseModule {
     @Singleton
     fun provideLocalDataSource(movieDao: MovieDao): LocalDataSource = LocalDataSourceImpl(movieDao)
 
+
 //    @Provides
 //    @Singleton
 //    fun provideMovieRepository(movieDataSource: LocalDataSource) = MovieRepository(movieDataSource)
