@@ -1,3 +1,4 @@
 package com.tmdb.movie.data.remote
 
-class RemoteDataSourceImpl : RemoteDataSource
+class RemoteDataSourceImpl(private val movieService: MovieService) : RemoteDataSource{
+}
