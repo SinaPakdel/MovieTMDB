@@ -10,19 +10,15 @@ import com.tmdb.movie.databinding.ItemMovieBinding
 import com.tmdb.movie.model.ui.MovieItem
 
 class MovieAdapter(
-    private val onclick: (MovieItem) -> Unit,
-    private val onLongClick: (MovieItem) -> Unit
+    private val onclick: (Int) -> Unit,
+    private val onLikeStateClick: (MovieItem) -> Unit,
 ) :
     ListAdapter<MovieItem, MovieAdapter.ViewHolder>(DiffCallback()) {
     inner class ViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.apply {
-                setOnClickListener { onclick(getItem(adapterPosition)) }
-                setOnLongClickListener {
-                    onLongClick(getItem(adapterPosition))
-                    true
-                }
+                setOnClickListener { getItem(adapterPosition).id?.let { id -> onclick(id) } }
             }
         }
 
@@ -30,6 +26,9 @@ class MovieAdapter(
             with(binding) {
                 tvItemTitle.text = item.title
                 Glide.with(binding.root).load(item.posterPath).into(itemMoviePoster)
+                imgLike.apply {
+                    setOnClickListener { onLikeStateClick(getItem(adapterPosition)) }
+                }
             }
         }
 
