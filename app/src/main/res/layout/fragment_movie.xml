@@ -6,13 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.features.movie.MovieFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_movie"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
-        tools:itemCount="20"
-        tools:listitem="@layout/item_movie" />
+
 
 </FrameLayout>
