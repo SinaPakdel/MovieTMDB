@@ -1,15 +1,15 @@
 package com.tmdb.movie.ui.features.main.selected_movies
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
+import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentSelectedMoviesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SelectedMoviesFragment : Fragment() {
+@AndroidEntryPoint
+class SelectedMoviesFragment : Fragment(R.layout.fragment_selected_movies) {
     val selectedMoviesViewModel: SelectedMoviesViewModel by viewModels()
 
     private var _binding: FragmentSelectedMoviesBinding? = null
@@ -17,6 +17,7 @@ class SelectedMoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding= FragmentSelectedMoviesBinding.bind(view)
     }
     override fun onDestroyView() {
         super.onDestroyView()

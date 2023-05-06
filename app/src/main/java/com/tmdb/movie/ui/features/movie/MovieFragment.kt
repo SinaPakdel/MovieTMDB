@@ -8,9 +8,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentMovieBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class MovieFragment : Fragment() {
+@AndroidEntryPoint
+class MovieFragment : Fragment(R.layout.fragment_movie) {
 
     val movieViewModel  : MovieViewModel by viewModels()
 
