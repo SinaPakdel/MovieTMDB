@@ -32,7 +32,7 @@ class UpcomingMoviesViewModel @Inject constructor(private val repository: Reposi
         }
     }
 
-    fun getUpcomingMovies() {
+    private fun getUpcomingMovies() {
         job?.cancel()
         job = viewModelScope.launch {
             addPopularMovies(repository.getUpcomingMovies(page))
