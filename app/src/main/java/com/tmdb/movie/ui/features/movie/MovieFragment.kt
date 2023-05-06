@@ -25,9 +25,7 @@ class MovieFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textMovie
-        movieViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
         return root
     }
 
