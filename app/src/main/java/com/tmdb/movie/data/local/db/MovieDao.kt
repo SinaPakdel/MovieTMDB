@@ -1,6 +1,7 @@
 package com.tmdb.movie.data.local.db
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -15,5 +16,8 @@ interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movieEntity: MovieEntity)
+
+    @Delete
+    suspend fun deleteMovie(movieEntity: MovieEntity)
 
 }

@@ -21,4 +21,8 @@ class Repository @Inject constructor(
     suspend fun insertMovie(movie: MovieItem) {
         localDataSource.insertMovie(movie)
     }
+
+    suspend fun deleteMovie(movie: MovieItem) {
+        localDataSource.deleteMovie(movie)
+    }
 }

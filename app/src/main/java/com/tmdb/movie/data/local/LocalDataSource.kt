@@ -9,4 +9,6 @@ interface LocalDataSource : DataSource {
     fun getSelectedMovies(): Flow<List<MovieItem>>
 
     suspend fun insertMovie(movieItem: MovieItem)
+
+    suspend fun deleteMovie(movieItem: MovieItem)
 }
