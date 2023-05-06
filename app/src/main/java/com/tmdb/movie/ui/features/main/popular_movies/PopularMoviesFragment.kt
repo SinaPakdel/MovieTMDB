@@ -6,27 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.tmdb.movie.databinding.FragmentPopularMoviesBinding
 
 class PopularMoviesFragment : Fragment() {
 
+    val popularMoviesViewModel : PopularMoviesViewModel by viewModels()
+
     private var _binding: FragmentPopularMoviesBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val popularMoviesViewModel =
-            ViewModelProvider(this).get(PopularMoviesViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentPopularMoviesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-        val textView: TextView = binding.textHome
-        return root
     }
 
     override fun onDestroyView() {
