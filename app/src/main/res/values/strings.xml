@@ -5,4 +5,7 @@
     <string name="title_selected">Selected</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="movie_name">Movie Name</string>
+    <string name="movie_description">An Amazon princess comes to the world of Man in the grips of the First World War to confront the forces of evil and bring an end to human conflict.</string>
+    <string name="rate_bar">Rate Bar</string>
 </resources>
