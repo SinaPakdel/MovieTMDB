@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
 import com.tmdb.movie.model.ui.MovieItem
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,13 +14,15 @@ import javax.inject.Inject
 class UpcomingMoviesViewModel @Inject constructor(private val repository: Repository) :
     ViewModel() {
 
-    private val _popularMovies = MutableLiveData<List<MovieItem>>()
-    val popularMovies: LiveData<List<MovieItem>> = _popularMovies
+
+    private val upcomingMoviesList = arrayListOf<MovieItem>()
+    private val _upcomingMovies = MutableLiveData<List<MovieItem>>()
+    val upcomingMovies: LiveData<List<MovieItem>> = _upcomingMovies
     private var page = 1
     private var job: Job? = null
 
     fun saveMovie(movieItem: MovieItem) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.insertMovie(movieItem)
         }
     }
@@ -27,7 +30,8 @@ class UpcomingMoviesViewModel @Inject constructor(private val repository: Reposi
     fun getUpcomingMovies() {
         job?.cancel()
         job = viewModelScope.launch {
-            _popularMovies.postValue(repository.getUpcomingMovies(page))
+            addPopularMovies(repository.getUpcomingMovies(page))
+            _upcomingMovies.postValue(upcomingMoviesList)
         }
     }
 
@@ -36,4 +40,7 @@ class UpcomingMoviesViewModel @Inject constructor(private val repository: Reposi
         getUpcomingMovies()
     }
 
+    private fun addPopularMovies(popularMovies: List<MovieItem>) {
+        upcomingMoviesList.addAll(popularMovies)
+    }
 }
