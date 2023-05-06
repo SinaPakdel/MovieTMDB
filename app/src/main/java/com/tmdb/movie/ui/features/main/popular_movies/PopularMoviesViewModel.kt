@@ -6,11 +6,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
 import com.tmdb.movie.model.ui.MovieItem
+import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
 class PopularMoviesViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
@@ -19,6 +24,10 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
     val popularMovies: LiveData<List<MovieItem>> = _popularMovies
     private var page = 1
     private var job: Job? = null
+
+
+    private val _popularEvent = Channel<PopularEvent>()
+    val popularEvent: Flow<PopularEvent> = _popularEvent.receiveAsFlow()
 
     init {
         getPopularMovies()
@@ -45,5 +54,17 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
 
     private fun addPopularMovies(popularMovies: List<MovieItem>) {
         popularMoviesList.addAll(popularMovies)
+    }
+
+    fun onItemMovieSelected(id: Int) = viewModelScope.launch {
+        _popularEvent.send(PopularEvent.NavigateToDetailsScreen(id))
+    }
+
+    fun onLikeStateClicked(movieItem: MovieItem) =viewModelScope.launch {
+        _popularEvent.send(PopularEvent.LikeStateClicked(movieItem))
+    }
+
+    fun onLongItemMovieSelected(movieItem: MovieItem) =viewModelScope.launch {
+        _popularEvent.send(PopularEvent.LongItemMovieSelected(movieItem))
     }
 }
