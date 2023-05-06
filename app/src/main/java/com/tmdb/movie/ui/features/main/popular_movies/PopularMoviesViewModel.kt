@@ -19,6 +19,10 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
     private var page = 1
     private var job: Job? = null
 
+    init {
+        getPopularMovies()
+    }
+
     fun saveMovie(movieItem: MovieItem) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertMovie(movieItem)

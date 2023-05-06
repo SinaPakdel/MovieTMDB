@@ -21,6 +21,10 @@ class UpcomingMoviesViewModel @Inject constructor(private val repository: Reposi
     private var page = 1
     private var job: Job? = null
 
+    init {
+        getUpcomingMovies()
+    }
+
     fun saveMovie(movieItem: MovieItem) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertMovie(movieItem)

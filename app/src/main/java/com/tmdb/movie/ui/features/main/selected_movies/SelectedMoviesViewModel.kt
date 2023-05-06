@@ -16,6 +16,11 @@ class SelectedMoviesViewModel @Inject constructor(private val repository: Reposi
     val selectedMovies: LiveData<List<MovieItem>> = _selectedMovies
     private var job: Job? = null
 
+
+    init {
+        getSelectedMovies()
+    }
+
     fun deleteMovie(movieItem: MovieItem) {
         viewModelScope.launch {
             repository.deleteMovie(movieItem)
