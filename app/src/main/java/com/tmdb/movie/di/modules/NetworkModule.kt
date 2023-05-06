@@ -1,5 +1,7 @@
 package com.tmdb.movie.di.modules
 
+import com.tmdb.movie.data.remote.RemoteDataSource
+import com.tmdb.movie.data.remote.RemoteDataSourceImpl
 import com.tmdb.movie.data.remote.service.MovieService
 import com.tmdb.movie.di.qualifier.ApiKey
 import com.tmdb.movie.di.qualifier.BaseUrl
@@ -16,7 +18,6 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -83,5 +84,10 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMovieService(retrofit: Retrofit) = provideApi<MovieService>(retrofit)
+    fun provideMovieService(retrofit: Retrofit): MovieService = provideApi<MovieService>(retrofit)
+
+    @Singleton
+    @Provides
+    fun provideRemoteDataSource(movieService: MovieService): RemoteDataSource =
+        RemoteDataSourceImpl(movieService)
 }

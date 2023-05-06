@@ -4,8 +4,9 @@ import com.tmdb.movie.data.local.LocalDataSource
 import com.tmdb.movie.data.remote.RemoteDataSource
 import com.tmdb.movie.model.ui.MovieItem
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class Repository(
+class Repository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) {
