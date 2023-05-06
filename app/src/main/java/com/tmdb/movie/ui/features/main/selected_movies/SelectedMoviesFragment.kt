@@ -25,10 +25,7 @@ class SelectedMoviesFragment : Fragment() {
         _binding = FragmentSelectedMoviesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        selectedMoviesViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+
         return root
     }
 
