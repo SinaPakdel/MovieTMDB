@@ -11,9 +11,9 @@ interface MovieService {
     @GET("movie/popular")
     suspend fun getPopularMovies(@Query("page") page: Int): MovieResponse
 
-    @GET("movie/")
+    @GET("movie/upcoming")
     suspend fun getUpcomingMovies(@Query("page") page: Int): MovieResponse
 
-    @GET("movie/upcoming")
+    @GET("movie/{movie_id}")
     suspend fun getMovieDetails(@Path("movie_id") movieId: Int): MovieDetailsResponse
 }
