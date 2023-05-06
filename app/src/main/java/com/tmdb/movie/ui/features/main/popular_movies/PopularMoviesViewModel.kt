@@ -8,8 +8,9 @@ import com.tmdb.movie.data.repository.Repository
 import com.tmdb.movie.model.ui.MovieItem
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PopularMoviesViewModel(private val repository: Repository) : ViewModel() {
+class PopularMoviesViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
 
     private val _popularMovies = MutableLiveData<List<MovieItem>>()
     val popularMovies: LiveData<List<MovieItem>> = _popularMovies
