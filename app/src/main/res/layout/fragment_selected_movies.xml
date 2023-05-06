@@ -7,7 +7,7 @@
     tools:context=".ui.features.main.selected_movies.SelectedMoviesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_popular_movie"
+        android:id="@+id/rv_selected_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

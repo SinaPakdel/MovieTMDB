@@ -28,7 +28,7 @@ class SelectedMoviesViewModel @Inject constructor(private val repository: Reposi
         }
     }
 
-    fun getSelectedMovies() {
+    private fun getSelectedMovies() {
         job?.cancel()
         job = viewModelScope.launch {
             repository.getSeSelectedMovies().collect { movieItem ->
