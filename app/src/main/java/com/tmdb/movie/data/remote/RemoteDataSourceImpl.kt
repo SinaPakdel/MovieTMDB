@@ -1,24 +1,20 @@
 package com.tmdb.movie.data.remote
 
 import com.tmdb.movie.data.remote.service.MovieService
-import com.tmdb.movie.model.ui.MovieDetailsItem
-import com.tmdb.movie.model.ui.MovieItem
-import com.tmdb.movie.util.mapper.asMovieDetailsItem
-import com.tmdb.movie.util.mapper.asMoviesItem
+import com.tmdb.movie.util.safe_api.ResponseState
+import com.tmdb.movie.util.safe_api.safeApiCall
+import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSourceImpl(private val movieService: MovieService) : RemoteDataSource {
-    override suspend fun getPopularMovies(page: Int): List<MovieItem> {
-        val moviesDto = movieService.getPopularMovies(page).results
-        return moviesDto.asMoviesItem()
+    override suspend fun getPopularMovies(page: Int): Flow<ResponseState> {
+        return safeApiCall { movieService.getPopularMovies(page) }
     }
 
-    override suspend fun getUpcomingMovies(page: Int): List<MovieItem> {
-        val moviesDto = movieService.getUpcomingMovies(page).results
-        return moviesDto.asMoviesItem()
+    override suspend fun getUpcomingMovies(page: Int): Flow<ResponseState> {
+        return safeApiCall { movieService.getUpcomingMovies(page) }
     }
 
-    override suspend fun getMovieDetails(movieId: Int): MovieDetailsItem {
-        val movieDetail = movieService.getMovieDetails(movieId)
-        return movieDetail.asMovieDetailsItem()
+    override suspend fun getMovieDetails(movieId: Int): Flow<ResponseState> {
+        return safeApiCall { movieService.getMovieDetails(movieId) }
     }
 }
