@@ -15,6 +15,7 @@ import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentUpcomingMoviesBinding
 import com.tmdb.movie.ui.adapter.MovieAdapter
 import com.tmdb.movie.ui.features.main.upcoming_movies.events.UpcomingEventHandler
+import com.tmdb.movie.util.enums.StateHolder
 import com.tmdb.movie.util.view.makeSnack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -47,6 +48,7 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
 
         observers()
         eventHandler()
+        checkState()
     }
 
     private fun observers() {
@@ -84,5 +86,26 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun checkState() {
+        upcomingMoviesViewModel.stateHolder.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                StateHolder.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+
+                StateHolder.SUCCESS -> {
+                    binding.tvNetworkFailed.visibility = View.INVISIBLE
+                    binding.progressBar.visibility = View.INVISIBLE
+                }
+
+                StateHolder.ERROR -> {
+                    binding.tvNetworkFailed.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.INVISIBLE
+                    // TODO: ADD Invisible Recycler
+                }
+            }
+        }
     }
 }

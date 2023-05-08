@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 
 class RemoteDataSourceImpl(private val movieService: MovieService) : RemoteDataSource {
     override fun getPopularMovies(page: Int): Flow<ResponseState<List<MovieItem>>> {
-        return safeApiCallWithMapper<MovieResponse, List<MovieItem>>({ movieService.getPopularMovies(page)
+        return safeApiCallWithMapper({ movieService.getPopularMovies(page)
         }) {
             results.asMoviesItem()
         }
