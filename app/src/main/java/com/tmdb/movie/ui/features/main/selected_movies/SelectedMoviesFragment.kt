@@ -70,9 +70,6 @@ class SelectedMoviesFragment : Fragment(R.layout.fragment_selected_movies) {
                     is SelectedEventHandler.LongClicked -> {
                         // TODO: impl longClickedState later!! 
                     }
-                    is SelectedEventHandler.UndoAddedToSelectedClicked -> {
-                        selectedMoviesViewModel.deleteMovie(event.movieItem)
-                    }
                 }
             }
         }
