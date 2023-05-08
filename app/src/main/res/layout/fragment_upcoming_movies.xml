@@ -7,7 +7,7 @@
     tools:context=".ui.features.main.upcoming_movies.UpcomingMoviesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_popular_movie"
+        android:id="@+id/rv_upcoming_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

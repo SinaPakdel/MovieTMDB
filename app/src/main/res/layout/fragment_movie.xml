@@ -120,6 +120,41 @@
             app:layout_constraintStart_toStartOf="@+id/guideline10"
             app:layout_constraintTop_toTopOf="@+id/guideline11" />
 
+        <TextView
+            android:id="@+id/tvReleaseDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Release Date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline10"
+            app:layout_constraintTop_toBottomOf="@+id/tvRateMovie" />
+
+        <TextView
+            android:id="@+id/tvVoteAverage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Vote Average"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline10"
+            app:layout_constraintTop_toBottomOf="@+id/tvReleaseDate" />
+
+        <TextView
+            android:id="@+id/tvVoteCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Vote Count"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline10"
+            app:layout_constraintTop_toBottomOf="@+id/tvVoteAverage" />
+
+        <TextView
+            android:id="@+id/tvPopularity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Popularity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline10"
+            app:layout_constraintTop_toBottomOf="@+id/tvVoteCount" />
 
         <TextView
             android:id="@+id/tvDescription"
@@ -135,8 +170,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:layout_width="0dp"
         android:id="@+id/imgPosterMovie"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitXY"
         android:src="@drawable/mr_nobody_poster"
