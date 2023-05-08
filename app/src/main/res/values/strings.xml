@@ -8,4 +8,5 @@
     <string name="movie_name">Movie Name</string>
     <string name="movie_description">An Amazon princess comes to the world of Man in the grips of the First World War to confront the forces of evil and bring an end to human conflict.</string>
     <string name="rate_bar">Rate Bar</string>
+    <string name="item_successfully_added">Movie Successfully Added to Favorite!!</string>
 </resources>

@@ -2,14 +2,10 @@ package com.tmdb.movie.ui.features.main.upcoming_movies
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
@@ -19,8 +15,8 @@ import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentUpcomingMoviesBinding
 import com.tmdb.movie.ui.adapter.MovieAdapter
 import com.tmdb.movie.ui.features.main.upcoming_movies.events.UpcomingEventHandler
+import com.tmdb.movie.util.view.makeSnack
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -36,8 +32,12 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentUpcomingMoviesBinding.bind(view)
         movieAdapter = MovieAdapter(onclick = { movieItem -> upcomingMoviesViewModel.navigateToDetailsScreen(movieItem) },
-            onLikeStateClick = {},
-            onLongClickListener = {})
+            onLikeStateClick = { movieItem ->
+                upcomingMoviesViewModel.onLikeStateClicked(movieItem)
+            },
+            onLongClickListener = { movieItem ->
+                upcomingMoviesViewModel.onLongItemClicked(movieItem)
+            })
         with(binding) {
             rvUpcomingMovie.apply {
                 adapter = movieAdapter
@@ -66,6 +66,15 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
                                 event.id
                             )
                         )
+
+                        is UpcomingEventHandler.LikeStateClicked -> makeSnack(
+                            getString(R.string.item_successfully_added),
+                            binding.root
+                        )
+
+                        is UpcomingEventHandler.LongItemClicked -> {
+                            // TODO: impl  LongItemClicked later
+                        }
                     }
                 }
             }

@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
 import com.tmdb.movie.model.ui.MovieItem
-import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
 import com.tmdb.movie.ui.features.main.upcoming_movies.events.UpcomingEventHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -58,5 +57,14 @@ class UpcomingMoviesViewModel @Inject constructor(private val repository: Reposi
 
     fun navigateToDetailsScreen(movieItem: Int) = viewModelScope.launch {
         _upcomingEventHandler.send(UpcomingEventHandler.NavigateToDetailsScreen(movieItem))
+    }
+
+    fun onLikeStateClicked(movieItem: MovieItem) = viewModelScope.launch {
+        saveMovie(movieItem)
+        _upcomingEventHandler.send(UpcomingEventHandler.LikeStateClicked(movieItem))
+    }
+
+    fun onLongItemClicked(movieItem: MovieItem) = viewModelScope.launch {
+        _upcomingEventHandler.send(UpcomingEventHandler.LongItemClicked(movieItem))
     }
 }
