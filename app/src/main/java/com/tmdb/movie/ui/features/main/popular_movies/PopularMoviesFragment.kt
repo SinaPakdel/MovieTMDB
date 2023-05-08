@@ -33,12 +33,14 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
         // TODO: implement id for onItemMovieSelected & onLikeStateClicked later !!!
         movieAdapter =
             MovieAdapter(
-                onclick = { popularMoviesViewModel.onItemMovieSelected(1) },
-                onLikeStateClick = {
-                    popularMoviesViewModel.onLikeStateClicked(it)
+                onclick = { movieId ->
+                    popularMoviesViewModel.onItemMovieSelected(movieId)
                 },
-                onLongClickListener = {
-                        popularMoviesViewModel.onLongItemMovieSelected(it)
+                onLikeStateClick = { movieItem ->
+                    popularMoviesViewModel.onLikeStateClicked(movieItem)
+                },
+                onLongClickListener = { movieItem ->
+                    popularMoviesViewModel.onLongItemMovieSelected(movieItem)
                 })
 
         popularMoviesViewModel.popularMovies.observe(viewLifecycleOwner) {
