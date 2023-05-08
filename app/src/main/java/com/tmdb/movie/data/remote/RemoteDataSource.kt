@@ -7,7 +7,7 @@ import com.tmdb.movie.util.safe_api.ResponseState
 import kotlinx.coroutines.flow.Flow
 
 interface RemoteDataSource : DataSource{
-    suspend fun getPopularMovies(page: Int): Flow<ResponseState<List<MovieItem>>>
-    suspend fun getUpcomingMovies(page: Int): Flow<ResponseState<List<MovieItem>>>
-    suspend fun getMovieDetails(movieId: Int): Flow<ResponseState<MovieDetailsItem>>
+     fun getPopularMovies(page: Int): Flow<ResponseState<List<MovieItem>>>
+     fun getUpcomingMovies(page: Int): Flow<ResponseState<List<MovieItem>>>
+     fun getMovieDetails(movieId: Int): Flow<ResponseState<MovieDetailsItem>>
 }

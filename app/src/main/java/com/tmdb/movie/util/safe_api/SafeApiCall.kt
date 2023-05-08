@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.onStart
 import retrofit2.Response
 
-suspend inline fun <T, K> safeApiCall(
+inline fun <T, K> safeApiCall(
     crossinline apiCall: suspend () -> Response<T>,
     crossinline mapper: T.() -> K? = { null }
 ) = flow {

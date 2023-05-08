@@ -13,11 +13,11 @@ class Repository @Inject constructor(
     private val localDataSource: LocalDataSource,
     private val remoteDataSource: RemoteDataSource
 ) {
-    suspend fun getPopularMovies(page: Int): Flow<ResponseState<List<MovieItem>>> = remoteDataSource.getPopularMovies(page)
+    fun getPopularMovies(page: Int): Flow<ResponseState<List<MovieItem>>> = remoteDataSource.getPopularMovies(page)
 
-    suspend fun getUpcomingMovies(page: Int): Flow<ResponseState<List<MovieItem>>> = remoteDataSource.getUpcomingMovies(page)
+    fun getUpcomingMovies(page: Int): Flow<ResponseState<List<MovieItem>>> = remoteDataSource.getUpcomingMovies(page)
 
-    suspend fun getMovieDetails(movieId: Int): Flow<ResponseState<MovieDetailsItem>> = remoteDataSource.getMovieDetails(movieId)
+    fun getMovieDetails(movieId: Int): Flow<ResponseState<MovieDetailsItem>> = remoteDataSource.getMovieDetails(movieId)
 
     fun getSeSelectedMovies(): Flow<List<MovieItem>> = localDataSource.getSelectedMovies()
 
