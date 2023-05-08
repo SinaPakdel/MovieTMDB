@@ -14,7 +14,13 @@ class MovieAdapter(
     private val onLikeClicked: (MovieItem) -> Unit,
     private val onLongClickedListener: (MovieItem) -> Unit,
 ) :
-    ListAdapter<MovieItem, MovieAdapter.ViewHolder>(DiffCallback()) {
+    ListAdapter<MovieItem, MovieAdapter.ViewHolder>(object : DiffUtil.ItemCallback<MovieItem>() {
+        override fun areItemsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean =
+            oldItem.id == newItem.id
+
+        override fun areContentsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean =
+            oldItem == newItem
+    }) {
     inner class ViewHolder(private val binding: ItemMovieBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
@@ -38,14 +44,6 @@ class MovieAdapter(
         }
 
 
-    }
-
-    class DiffCallback : DiffUtil.ItemCallback<MovieItem>() {
-        override fun areItemsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean =
-            oldItem.id == newItem.id
-
-        override fun areContentsTheSame(oldItem: MovieItem, newItem: MovieItem): Boolean =
-            oldItem == newItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
