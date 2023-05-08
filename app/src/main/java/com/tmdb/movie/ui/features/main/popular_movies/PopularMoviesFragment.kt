@@ -1,6 +1,7 @@
 package com.tmdb.movie.ui.features.main.popular_movies
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,8 +11,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentPopularMoviesBinding
+import com.tmdb.movie.ui.adapter.EndlessRecyclerOnScrollListener
 import com.tmdb.movie.ui.adapter.MovieAdapter
 import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
 import com.tmdb.movie.util.view.makeSnack
@@ -43,19 +46,18 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
                 onLongClickListener = { movieItem ->
                     popularMoviesViewModel.onLongItemMovieSelected(movieItem)
                 })
-
-        popularMoviesViewModel.popularMovies.observe(viewLifecycleOwner) {
-            movieAdapter.submitList(it)
-        }
-
         with(binding) {
             rvPopularMovie.apply {
                 adapter = movieAdapter
                 layoutManager = GridLayoutManager(binding.root.context, 3)
             }
         }
-
+        setPaging()
         eventHandler()
+        popularMoviesViewModel.popularMovies.observe(viewLifecycleOwner) {
+            Log.e("LMNOP", "onViewCreated: ${it.size}", )
+            movieAdapter.submitList(it)
+        }
     }
 
     private fun eventHandler() {
@@ -85,4 +87,12 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
         _binding = null
     }
 
+    private fun setPaging() {
+        binding.rvPopularMovie.addOnScrollListener(object : EndlessRecyclerOnScrollListener(binding.rvPopularMovie.layoutManager as GridLayoutManager,20){
+            override fun onLoadMore(currentPage: Int) {
+                popularMoviesViewModel.nextPage()
+            }
+
+        })
+    }
 }
