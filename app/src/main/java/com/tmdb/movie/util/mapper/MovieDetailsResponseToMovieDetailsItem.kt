@@ -15,6 +15,7 @@ fun MovieDetailsResponse.asMovieDetailsItem(): MovieDetailsItem {
         popularity,
         posterPath,
         releaseDate,
+        backdropPath,
         runtime,
         status,
         voteAverage,

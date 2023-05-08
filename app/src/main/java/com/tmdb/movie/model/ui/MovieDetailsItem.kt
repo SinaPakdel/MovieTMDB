@@ -11,6 +11,7 @@ data class MovieDetailsItem(
     val overview: String?,
     val popularity: Double?,
     val posterPath: String?,
+    val backdropPath: String?,
     val releaseDate: String?,
     val runtime: Int?,
     val status: String?,
