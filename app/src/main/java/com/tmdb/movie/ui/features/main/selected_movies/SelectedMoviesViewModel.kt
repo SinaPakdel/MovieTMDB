@@ -1,5 +1,6 @@
 package com.tmdb.movie.ui.features.main.selected_movies
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -43,12 +44,18 @@ class SelectedMoviesViewModel @Inject constructor(private val repository: Reposi
         }
     }
 
+    private fun insertMovie(movieItem : MovieItem){
+        viewModelScope.launch {
+            repository.insertMovie(movieItem)
+        }
+    }
+
     fun onItemClicked(movieId: Int) = viewModelScope.launch {
         _selectedEventHandler.send(SelectedEventHandler.ItemClicked(movieId))
     }
 
     fun onLikeStateClicked(movieItem: MovieItem) = viewModelScope.launch {
-        repository.insertMovie(movieItem)
+        deleteMovie(movieItem)
         _selectedEventHandler.send(SelectedEventHandler.LikeStateClicked(movieItem))
     }
 
@@ -58,5 +65,7 @@ class SelectedMoviesViewModel @Inject constructor(private val repository: Reposi
 
     fun onUndoAddedToSelectedClicked(movieItem: MovieItem) =viewModelScope.launch {
         _selectedEventHandler.send(SelectedEventHandler.UndoAddedToSelectedClicked(movieItem))
+        repository.insertMovie(movieItem)
     }
+
 }

@@ -1,5 +1,6 @@
 package com.tmdb.movie.data.repository
 
+import android.util.Log
 import com.tmdb.movie.data.local.LocalDataSource
 import com.tmdb.movie.data.remote.RemoteDataSource
 import com.tmdb.movie.model.ui.MovieItem

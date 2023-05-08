@@ -70,7 +70,7 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
                         )
 
                         is PopularEvent.LikeStateClicked -> {
-                            makeSnack(getString(R.string.movie_save), binding.root)
+                            makeSnack(getString(R.string.item_successfully_added), binding.root)
                         }
 
                         is PopularEvent.LongItemMovieSelected -> {

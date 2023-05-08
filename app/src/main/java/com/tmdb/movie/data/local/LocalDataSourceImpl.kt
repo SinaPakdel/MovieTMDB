@@ -1,5 +1,6 @@
 package com.tmdb.movie.data.local
 
+import android.util.Log
 import com.tmdb.movie.data.local.db.MovieDao
 import com.tmdb.movie.model.ui.MovieItem
 import com.tmdb.movie.util.mapper.asMovieEntity
@@ -10,13 +11,12 @@ import kotlinx.coroutines.flow.flow
 class LocalDataSourceImpl(private val movieDao: MovieDao) : LocalDataSource {
     override fun getSelectedMovies(): Flow<List<MovieItem>> = flow {
         movieDao.getSelectedMovies().collect { moviesEntity ->
-            moviesEntity.asMoviesItem()
+           emit(moviesEntity.asMoviesItem())
         }
     }
 
     override suspend fun insertMovie(movieItem: MovieItem) {
-        val movieEntity = movieItem.asMovieEntity()
-        movieDao.insertMovie(movieEntity)
+        movieDao.insertMovie(movieItem.asMovieEntity())
     }
 
     override suspend fun deleteMovie(movieItem: MovieItem) {
