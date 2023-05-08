@@ -1,17 +1,21 @@
 package com.tmdb.movie.ui.features.main.popular_movies
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
+import com.tmdb.movie.model.dto.movies.MovieResponse
 import com.tmdb.movie.model.ui.MovieItem
 import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
+import com.tmdb.movie.util.safe_api.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -42,9 +46,25 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
     fun getPopularMovies() {
         job?.cancel()
         job = viewModelScope.launch {
-            addPopularMovies(repository.getPopularMovies(page))
-            _popularMovies.postValue(popularMoviesList)
+            val x =
+       repository.getPopularMovies(page).collect{responseState ->
+           when(responseState){
+               is ResponseState.Error -> {
+                   Log.e("ERRRROOOORR", "getPopularMovies: ERRRROOOORR", )
+               }
+               ResponseState.Loading -> {
+                   Log.e("LOADDING", "getPopularMovies: LOADDING", )
+
+               }
+               is ResponseState.Success -> {
+                   addPopularMovies(responseState.data)
+                   _popularMovies.postValue(popularMoviesList)
+               }
+           }
+       }
+
         }
+
     }
 
     fun nextPage() {

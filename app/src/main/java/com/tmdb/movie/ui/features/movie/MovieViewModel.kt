@@ -30,7 +30,7 @@ class MovieViewModel @Inject constructor(
 
     private fun getMovieDetails(movieId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            _movie.postValue(repository.getMovieDetails(movieId))
+//            _movie.postValue(repository.getMovieDetails(movieId))
         }
     }
 }

@@ -64,7 +64,7 @@ class SelectedMoviesViewModel @Inject constructor(private val repository: Reposi
     }
 
     fun onUndoAddedToSelectedClicked(movieItem: MovieItem) =viewModelScope.launch {
-        _selectedEventHandler.send(SelectedEventHandler.UndoAddedToSelectedClicked(movieItem))
+//        _selectedEventHandler.send(SelectedEventHandler.UndoAddedToSelectedClicked(movieItem))
         repository.insertMovie(movieItem)
     }
 
