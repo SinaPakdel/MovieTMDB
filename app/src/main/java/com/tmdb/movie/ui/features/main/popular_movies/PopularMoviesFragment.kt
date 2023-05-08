@@ -11,12 +11,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentPopularMoviesBinding
 import com.tmdb.movie.ui.adapter.EndlessRecyclerOnScrollListener
 import com.tmdb.movie.ui.adapter.MovieAdapter
 import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
+import com.tmdb.movie.util.enums.StateHolder
 import com.tmdb.movie.util.view.makeSnack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -54,8 +54,9 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
         }
         setPaging()
         eventHandler()
+        checkState()
         popularMoviesViewModel.popularMovies.observe(viewLifecycleOwner) {
-            Log.e("LMNOP", "onViewCreated: ${it.size}", )
+            Log.e("LMNOP", "onViewCreated: ${it.size}")
             movieAdapter.submitList(it)
         }
     }
@@ -88,11 +89,35 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
     }
 
     private fun setPaging() {
-        binding.rvPopularMovie.addOnScrollListener(object : EndlessRecyclerOnScrollListener(binding.rvPopularMovie.layoutManager as GridLayoutManager,20){
+        binding.rvPopularMovie.addOnScrollListener(object : EndlessRecyclerOnScrollListener(
+            binding.rvPopularMovie.layoutManager as GridLayoutManager,
+            20
+        ) {
             override fun onLoadMore(currentPage: Int) {
                 popularMoviesViewModel.nextPage()
             }
 
         })
+    }
+
+    private fun checkState() {
+        popularMoviesViewModel.stateHolder.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                StateHolder.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+
+                StateHolder.SUCCESS -> {
+                    binding.tvNetworkFailed.visibility = View.INVISIBLE
+                    binding.progressBar.visibility = View.INVISIBLE
+                }
+
+                StateHolder.ERROR -> {
+                    binding.tvNetworkFailed.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.rvPopularMovie.visibility = View.INVISIBLE
+                }
+            }
+        }
     }
 }

@@ -14,4 +14,23 @@
         app:spanCount="3"
         tools:itemCount="20"
         tools:listitem="@layout/item_movie" />
+
+    <TextView
+        android:id="@+id/tv_network_failed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/network_failed"
+        android:textSize="33sp"
+        android:visibility="invisible"
+        android:textStyle="bold|italic" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_gravity="center"/>
+
+
 </FrameLayout>
