@@ -1,26 +1,22 @@
 package com.tmdb.movie.util.safe_api
 
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.onStart
 import retrofit2.Response
 
-inline fun <T, K> safeApiCall(
+inline fun <T, K> safeApiCallWithMapper(
     crossinline apiCall: suspend () -> Response<T>,
-    crossinline mapper: T.() -> K? = { null }
-) = flow {
+    crossinline mapper: T.() -> K
+): Flow<ResponseState<K>> = flow {
+    emit(ResponseState.Loading)
     try {
         val response = apiCall()
         if (response.isSuccessful) {
-            val responseBody = response.body()
-            if (responseBody?.mapper() == null) {
-                emit(ResponseState.Success(responseBody))
-            } else {
-                emit(ResponseState.Success(responseBody.mapper()))
-            }
+            emit(ResponseState.Success(response.body()!!.mapper()))
         } else {
             emit(ResponseState.Error(ErrorState.ErrorCode(response.message())))
         }
     } catch (e: Exception) {
         emit(ResponseState.Error(ErrorState.ErrorMessage(e.message.toString())))
     }
-}.onStart { emit(ResponseState.Loading) }
+}
