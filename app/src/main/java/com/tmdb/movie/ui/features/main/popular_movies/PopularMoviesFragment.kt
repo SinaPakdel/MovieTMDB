@@ -36,10 +36,10 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
                 onclick = { movieId ->
                     popularMoviesViewModel.onItemMovieSelected(movieId)
                 },
-                onLikeStateClick = { movieItem ->
+                onLikeClicked = { movieItem ->
                     popularMoviesViewModel.onLikeStateClicked(movieItem)
                 },
-                onLongClickListener = { movieItem ->
+                onLongClickedListener = { movieItem ->
                     popularMoviesViewModel.onLongItemMovieSelected(movieItem)
                 })
 

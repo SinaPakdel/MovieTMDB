@@ -32,10 +32,10 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentUpcomingMoviesBinding.bind(view)
         movieAdapter = MovieAdapter(onclick = { movieItem -> upcomingMoviesViewModel.navigateToDetailsScreen(movieItem) },
-            onLikeStateClick = { movieItem ->
+            onLikeClicked = { movieItem ->
                 upcomingMoviesViewModel.onLikeStateClicked(movieItem)
             },
-            onLongClickListener = { movieItem ->
+            onLongClickedListener = { movieItem ->
                 upcomingMoviesViewModel.onLongItemClicked(movieItem)
             })
         with(binding) {

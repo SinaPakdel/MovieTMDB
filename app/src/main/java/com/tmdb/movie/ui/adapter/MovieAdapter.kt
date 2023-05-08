@@ -1,7 +1,6 @@
 package com.tmdb.movie.ui.adapter
 
 import android.view.LayoutInflater
-import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -12,8 +11,8 @@ import com.tmdb.movie.model.ui.MovieItem
 
 class MovieAdapter(
     private val onclick: (Int) -> Unit,
-    private val onLikeStateClick: (MovieItem) -> Unit,
-    private val onLongClickListener: (MovieItem) -> Unit,
+    private val onLikeClicked: (MovieItem) -> Unit,
+    private val onLongClickedListener: (MovieItem) -> Unit,
 ) :
     ListAdapter<MovieItem, MovieAdapter.ViewHolder>(DiffCallback()) {
     inner class ViewHolder(private val binding: ItemMovieBinding) :
@@ -22,7 +21,7 @@ class MovieAdapter(
             binding.root.apply {
                 setOnClickListener { getItem(adapterPosition).id?.let { id -> onclick(id) } }
                 setOnLongClickListener {
-                    onLongClickListener(getItem(adapterPosition))
+                    onLongClickedListener(getItem(adapterPosition))
                     true
                 }
             }
@@ -33,7 +32,7 @@ class MovieAdapter(
                 tvItemTitle.text = item.title
                 Glide.with(binding.root).load(item.posterPath).into(itemMoviePoster)
                 imgLike.apply {
-                    setOnClickListener { onLikeStateClick(getItem(adapterPosition)) }
+                    setOnClickListener { onLikeClicked(getItem(adapterPosition)) }
                 }
             }
         }
