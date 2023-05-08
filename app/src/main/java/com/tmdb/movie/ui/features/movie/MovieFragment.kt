@@ -12,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentMovieBinding
 import com.tmdb.movie.util.consts.Services.POSTER_BASE_URL
+import com.tmdb.movie.util.enums.StateHolder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,10 +34,32 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
                 Glide.with(this.root).load(POSTER_BASE_URL + movieDetailsItem.posterPath).into(imgPosterMovie)
             }
         }
+        checkState()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun checkState() {
+        movieViewModel.stateHolder.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                StateHolder.LOADING -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                }
+
+                StateHolder.SUCCESS -> {
+                    binding.hostDetails.visibility = View.VISIBLE
+                    binding.tvNetworkFailed.visibility = View.INVISIBLE
+                    binding.progressBar.visibility = View.INVISIBLE
+                }
+
+                StateHolder.ERROR -> {
+                    binding.tvNetworkFailed.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.INVISIBLE
+                }
+            }
+        }
     }
 }

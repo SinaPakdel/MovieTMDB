@@ -103,7 +103,7 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
                 StateHolder.ERROR -> {
                     binding.tvNetworkFailed.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.INVISIBLE
-                    // TODO: ADD Invisible Recycler
+                   binding.rvUpcomingMovie.visibility = View.INVISIBLE
                 }
             }
         }
