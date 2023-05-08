@@ -33,7 +33,7 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
         getPopularMovies()
     }
 
-    fun saveMovie(movieItem: MovieItem) {
+    private fun saveMovie(movieItem: MovieItem) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertMovie(movieItem)
         }
@@ -60,11 +60,12 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
         _popularEvent.send(PopularEvent.NavigateToDetailsScreen(id))
     }
 
-    fun onLikeStateClicked(movieItem: MovieItem) =viewModelScope.launch {
+    fun onLikeStateClicked(movieItem: MovieItem) = viewModelScope.launch {
+        saveMovie(movieItem)
         _popularEvent.send(PopularEvent.LikeStateClicked(movieItem))
     }
 
-    fun onLongItemMovieSelected(movieItem: MovieItem) =viewModelScope.launch {
+    fun onLongItemMovieSelected(movieItem: MovieItem) = viewModelScope.launch {
         _popularEvent.send(PopularEvent.LongItemMovieSelected(movieItem))
     }
 }

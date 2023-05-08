@@ -14,6 +14,7 @@ import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentPopularMoviesBinding
 import com.tmdb.movie.ui.adapter.MovieAdapter
 import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
+import com.tmdb.movie.util.view.makeSnack
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -67,7 +68,7 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
                         )
 
                         is PopularEvent.LikeStateClicked -> {
-                            // TODO: impl logic for handling likeState
+                            makeSnack(getString(R.string.movie_save), binding.root)
                         }
 
                         is PopularEvent.LongItemMovieSelected -> {
