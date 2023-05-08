@@ -28,7 +28,7 @@ class MovieViewModel @Inject constructor(
         movieId?.let { getMovieDetails(it) }
     }
 
-    fun getMovieDetails(movieId: Int) {
+    private fun getMovieDetails(movieId: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             _movie.postValue(repository.getMovieDetails(movieId))
         }

@@ -8,8 +8,10 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentMovieBinding
+import com.tmdb.movie.util.consts.Services.POSTER_BASE_URL
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,6 +26,11 @@ class MovieFragment : Fragment(R.layout.fragment_movie) {
         with(binding) {
             movieViewModel.movie.observe(viewLifecycleOwner) { movieDetailsItem ->
                 tvTitleMovie.text = movieDetailsItem.originalTitle
+                tvDescription.text = movieDetailsItem.overview
+                tvVoteAverage.text = movieDetailsItem.voteAverage.toString()
+                tvPopularity.text = movieDetailsItem.popularity.toString()
+                Glide.with(this.root).load(POSTER_BASE_URL + movieDetailsItem.backdropPath).into(imgCoverMovie)
+                Glide.with(this.root).load(POSTER_BASE_URL + movieDetailsItem.posterPath).into(imgPosterMovie)
             }
         }
     }
