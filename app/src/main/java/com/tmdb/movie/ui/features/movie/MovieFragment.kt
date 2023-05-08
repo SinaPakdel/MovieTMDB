@@ -14,15 +14,20 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MovieFragment : Fragment(R.layout.fragment_movie) {
-
-    val movieViewModel  : MovieViewModel by viewModels()
-
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
+    private val movieViewModel: MovieViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentMovieBinding.bind(view)
+        with(binding) {
+            movieViewModel.movie.observe(viewLifecycleOwner) { movieDetailsItem ->
+                tvTitleMovie.text = movieDetailsItem.originalTitle
+            }
+        }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
