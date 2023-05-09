@@ -67,7 +67,7 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
                 popularMoviesViewModel.popularEvent.collect { event ->
                     when (event) {
                         is PopularEvent.NavigateToDetailsScreen -> navController.navigate(
-                            PopularMoviesFragmentDirections.actionGlobalMovieFragment(event.id)
+                            PopularMoviesFragmentDirections.actionGlobalItemMovieBtmSheetDialog(event.id)
                         )
 
                         is PopularEvent.LikeStateClicked -> {

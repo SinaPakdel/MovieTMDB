@@ -2,34 +2,34 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/fragmentPopularMovies">
-
-    <fragment
-        android:id="@+id/fragmentPopularMovies"
-        android:name="com.tmdb.movie.ui.features.main.popular_movies.PopularMoviesFragment"
-        android:label="@string/title_popular"
-        tools:layout="@layout/fragment_popular_movies" />
+    android:id="@+id/app_nav_graph"
+    app:startDestination="@id/fragmentPopularMovies">
 
     <fragment
         android:id="@+id/fragmentUpcomingMovies"
         android:name="com.tmdb.movie.ui.features.main.upcoming_movies.UpcomingMoviesFragment"
         android:label="@string/title_upcoming"
         tools:layout="@layout/fragment_upcoming_movies" />
-
+    <fragment
+        android:id="@+id/fragmentPopularMovies"
+        android:name="com.tmdb.movie.ui.features.main.popular_movies.PopularMoviesFragment"
+        android:label="@string/title_popular"
+        tools:layout="@layout/fragment_popular_movies" />
     <fragment
         android:id="@+id/fragmentSelectedMovies"
         android:name="com.tmdb.movie.ui.features.main.selected_movies.SelectedMoviesFragment"
         android:label="@string/title_selected"
         tools:layout="@layout/fragment_selected_movies" />
-    <fragment
-        android:id="@+id/movieFragment"
-        android:name="com.tmdb.movie.ui.features.movie.MovieFragment"
-        android:label="fragment_movie"
-        tools:layout="@layout/fragment_movie" >
+    <dialog
+        android:id="@+id/itemMovieBtmSheetDialog"
+        android:name="com.tmdb.movie.ui.features.movie.MovieBtmSheetDialogFragment"
+        tools:layout="@layout/fragment_item_movie"
+        android:label="ItemMovieBtmSheetDialog" >
         <argument
             android:name="movieId"
             app:argType="integer" />
-    </fragment>
-    <action android:id="@+id/action_global_movieFragment" app:destination="@id/movieFragment" />
+    </dialog>
+    <action
+        android:id="@+id/action_global_itemMovieBtmSheetDialog"
+        app:destination="@id/itemMovieBtmSheetDialog" />
 </navigation>
