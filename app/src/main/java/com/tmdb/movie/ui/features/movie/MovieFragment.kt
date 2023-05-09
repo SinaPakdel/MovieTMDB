@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentMovieBinding
 import com.tmdb.movie.util.consts.Services.POSTER_BASE_URL
@@ -16,7 +17,7 @@ import com.tmdb.movie.util.enums.StateHolder
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MovieFragment : Fragment(R.layout.fragment_movie) {
+class MovieFragment : BottomSheetDialogFragment(R.layout.fragment_movie) {
     private var _binding: FragmentMovieBinding? = null
     private val binding get() = _binding!!
     private val movieViewModel: MovieViewModel by viewModels()
