@@ -11,6 +11,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentUpcomingMoviesBinding
 import com.tmdb.movie.ui.adapter.MovieAdapter
@@ -51,6 +52,7 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
         observers()
         eventHandler()
         checkState()
+        setPagination()
     }
 
     private fun observers() {
@@ -58,6 +60,19 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
             Log.e(TAG, "onViewCreated: $it")
             movieAdapter.submitList(it)
         }
+    }
+
+    private fun setPagination() {
+        binding.rvUpcomingMovie.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val lastPosition = layoutManager.findLastVisibleItemPosition()
+                if (lastPosition == movieAdapter.itemCount - 1) {
+                    upcomingMoviesViewModel.nextPage()
+                    movieAdapter.notifyDataSetChanged()
+                }
+            }
+        })
     }
 
     private fun eventHandler() {
