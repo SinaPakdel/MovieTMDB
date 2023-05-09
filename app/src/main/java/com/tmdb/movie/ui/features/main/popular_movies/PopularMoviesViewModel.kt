@@ -11,6 +11,7 @@ import com.tmdb.movie.ui.model.MovieItem
 import com.tmdb.movie.util.enums.StateHolder
 import com.tmdb.movie.util.safe_api.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -55,7 +56,7 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
 
     private fun getPopularMovies() {
         job?.cancel()
-        job = viewModelScope.launch {
+        job = viewModelScope.launch(Dispatchers.IO) {
             repository.getPopularMovies(page).collect { responseState ->
                 when (responseState) {
                     is ResponseState.Error -> changeStateHolder(StateHolder.ERROR)

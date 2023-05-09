@@ -83,8 +83,6 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
                         is UpcomingEventHandler.LongItemClicked -> {
                             // TODO: impl  LongItemClicked later
                         }
-
-
                     }
                 }
             }

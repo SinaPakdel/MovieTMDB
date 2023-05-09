@@ -14,6 +14,9 @@ interface MovieDao {
     @Query("select * from movie_table")
     fun getSelectedMovies(): Flow<List<MovieEntity>>
 
+    @Query("select movie_id from movie_table")
+    suspend fun getIdsMoviesSaved(): List<Int>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertMovie(movieEntity: MovieEntity)
 

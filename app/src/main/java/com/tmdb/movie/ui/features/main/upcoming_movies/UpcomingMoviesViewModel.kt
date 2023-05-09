@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
-import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
 import com.tmdb.movie.ui.features.main.upcoming_movies.events.UpcomingEventHandler
 import com.tmdb.movie.ui.model.MovieItem
 import com.tmdb.movie.util.enums.StateHolder
@@ -43,7 +42,7 @@ class UpcomingMoviesViewModel @Inject constructor(private val repository: Reposi
     }
 
     private fun saveMovie(movieItem: MovieItem) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.insertMovie(movieItem)
         }
     }
@@ -56,7 +55,7 @@ class UpcomingMoviesViewModel @Inject constructor(private val repository: Reposi
 
     private fun getUpcomingMovies() {
         job?.cancel()
-        job = viewModelScope.launch {
+        job = viewModelScope.launch(Dispatchers.IO) {
             repository.getUpcomingMovies(page).collect { responseState ->
                 when (responseState) {
                     is ResponseState.Error -> changeStateHolder(StateHolder.ERROR)
