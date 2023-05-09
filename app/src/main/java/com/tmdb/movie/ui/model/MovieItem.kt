@@ -4,4 +4,5 @@ data class MovieItem(
     val title: String?,
     val posterPath: String?,
     val id: Int?,
+    var isSelect: Boolean = false,
 )

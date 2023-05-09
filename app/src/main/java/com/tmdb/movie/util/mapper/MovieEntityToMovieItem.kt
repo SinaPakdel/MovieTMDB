@@ -7,4 +7,4 @@ fun List<MovieEntity>.asMoviesItem() = this.map { movieEntity ->
     movieEntity.asMovieItem()
 }
 
-private fun MovieEntity.asMovieItem() = MovieItem(title, posterPath, id)
+private fun MovieEntity.asMovieItem() = MovieItem(title, posterPath, id, true)
