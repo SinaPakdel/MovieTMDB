@@ -1,7 +1,7 @@
 package com.tmdb.movie.data.local
 
 import com.tmdb.movie.data.DataSource
-import com.tmdb.movie.model.ui.MovieItem
+import com.tmdb.movie.ui.model.MovieItem
 import kotlinx.coroutines.flow.Flow
 
 

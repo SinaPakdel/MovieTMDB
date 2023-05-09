@@ -1,6 +1,6 @@
 package com.tmdb.movie.ui.features.main.selected_movies.events
 
-import com.tmdb.movie.model.ui.MovieItem
+import com.tmdb.movie.ui.model.MovieItem
 
 sealed class SelectedEventHandler() {
     data class ItemClicked(val movieId: Int) : SelectedEventHandler()

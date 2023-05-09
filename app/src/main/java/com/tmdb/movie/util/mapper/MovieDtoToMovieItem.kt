@@ -1,7 +1,7 @@
 package com.tmdb.movie.util.mapper
 
-import com.tmdb.movie.model.dto.movies.MovieDto
-import com.tmdb.movie.model.ui.MovieItem
+import com.tmdb.movie.data.remote.model.movies.MovieDto
+import com.tmdb.movie.ui.model.MovieItem
 
 fun List<MovieDto>?.asMoviesItem(): List<MovieItem> {
     return this?.map { movieDto ->

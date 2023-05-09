@@ -1,4 +1,4 @@
-package com.tmdb.movie.model.entity
+package com.tmdb.movie.data.local.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -2,7 +2,7 @@ package com.tmdb.movie.data.local.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.tmdb.movie.model.entity.MovieEntity
+import com.tmdb.movie.data.local.model.MovieEntity
 
 
 @Database(entities = [MovieEntity::class], version = 1, exportSchema = false)

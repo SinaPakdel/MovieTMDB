@@ -1,12 +1,11 @@
 package com.tmdb.movie.ui.features.main.selected_movies
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
-import com.tmdb.movie.model.ui.MovieItem
+import com.tmdb.movie.ui.model.MovieItem
 import com.tmdb.movie.ui.features.main.selected_movies.events.SelectedEventHandler
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job

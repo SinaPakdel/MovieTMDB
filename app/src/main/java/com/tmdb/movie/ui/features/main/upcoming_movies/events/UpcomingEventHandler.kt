@@ -1,7 +1,6 @@
 package com.tmdb.movie.ui.features.main.upcoming_movies.events
 
-import com.tmdb.movie.model.ui.MovieItem
-import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
+import com.tmdb.movie.ui.model.MovieItem
 
 sealed class UpcomingEventHandler {
     data class NavigateToDetailsScreen(val id: Int) : UpcomingEventHandler()

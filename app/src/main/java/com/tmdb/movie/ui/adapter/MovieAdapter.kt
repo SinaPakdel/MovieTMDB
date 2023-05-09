@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.tmdb.movie.databinding.ItemMovieBinding
-import com.tmdb.movie.model.ui.MovieItem
+import com.tmdb.movie.ui.model.MovieItem
 
 class MovieAdapter(
     private val onclick: (Int) -> Unit,

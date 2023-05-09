@@ -1,6 +1,6 @@
 package com.tmdb.movie.ui.features.main.popular_movies.events
 
-import com.tmdb.movie.model.ui.MovieItem
+import com.tmdb.movie.ui.model.MovieItem
 
 sealed class PopularEvent {
     data class NavigateToDetailsScreen(val id: Int) : PopularEvent()
