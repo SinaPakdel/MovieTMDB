@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
 import com.tmdb.movie.ui.model.MovieDetailsItem
+import com.tmdb.movie.util.consts.MovieFragmentKey.MOVIE_ID
 import com.tmdb.movie.util.enums.StateHolder
 import com.tmdb.movie.util.safe_api.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,9 +20,6 @@ class MovieViewModel @Inject constructor(
     private val repository: Repository,
     private val stateHandle: SavedStateHandle
 ) : ViewModel() {
-    companion object {
-        const val MOVIE_ID = "movieId"
-    }
 
     private val _stateHolder = MutableLiveData<StateHolder>().apply {
         StateHolder.LOADING
