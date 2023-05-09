@@ -5,8 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
-import com.tmdb.movie.ui.model.MovieItem
+import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
 import com.tmdb.movie.ui.features.main.upcoming_movies.events.UpcomingEventHandler
+import com.tmdb.movie.ui.model.MovieItem
 import com.tmdb.movie.util.enums.StateHolder
 import com.tmdb.movie.util.safe_api.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,6 +48,12 @@ class UpcomingMoviesViewModel @Inject constructor(private val repository: Reposi
         }
     }
 
+    private fun deleteMovie(movieItem: MovieItem) {
+        viewModelScope.launch {
+            repository.deleteMovie(movieItem)
+        }
+    }
+
     private fun getUpcomingMovies() {
         job?.cancel()
         job = viewModelScope.launch {
@@ -83,9 +90,19 @@ class UpcomingMoviesViewModel @Inject constructor(private val repository: Reposi
         _upcomingEventHandler.send(UpcomingEventHandler.NavigateToDetailsScreen(movieItem))
     }
 
-    fun onLikeStateClicked(movieItem: MovieItem) = viewModelScope.launch {
-        saveMovie(movieItem)
-        _upcomingEventHandler.send(UpcomingEventHandler.LikeStateClicked(movieItem))
+    fun onLikeOrUnLikeClicked(movieItem: MovieItem) = viewModelScope.launch {
+        when (movieItem.isSelect) {
+            false -> {
+                saveMovie(movieItem)
+                _upcomingEventHandler.send(UpcomingEventHandler.LikeStateClicked(movieItem))
+            }
+
+            true -> {
+
+                deleteMovie(movieItem)
+                _upcomingEventHandler.send(UpcomingEventHandler.UnlikeStateClicked(movieItem))
+            }
+        }
     }
 
     fun onLongItemClicked(movieItem: MovieItem) = viewModelScope.launch {

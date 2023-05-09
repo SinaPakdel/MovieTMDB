@@ -90,13 +90,11 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
     fun onLikeOrUnLikeClicked(movieItem: MovieItem) = viewModelScope.launch {
         when (movieItem.isSelect) {
             false -> {
-                Log.e("LIKKK", "onLikeOrUnLikeClicked: L:IJKKKKK", )
                 saveMovie(movieItem)
                 _popularEvent.send(PopularEvent.LikeStateClicked(movieItem))
             }
 
             true -> {
-                Log.e("LIKKK", "onLikeOrUnLikeClicked: UNL:IJKKKKK", )
 
                 deleteMovie(movieItem)
                 _popularEvent.send(PopularEvent.UnlikeStateClicked(movieItem))

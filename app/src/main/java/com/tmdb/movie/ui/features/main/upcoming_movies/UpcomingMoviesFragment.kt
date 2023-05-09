@@ -32,9 +32,11 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentUpcomingMoviesBinding.bind(view)
-        movieAdapter = MovieAdapter(onclick = { movieItem -> upcomingMoviesViewModel.navigateToDetailsScreen(movieItem) },
+        movieAdapter = MovieAdapter(onclick = { movieItem ->
+            upcomingMoviesViewModel.navigateToDetailsScreen(movieItem)
+        },
             onLikeClicked = { movieItem ->
-                upcomingMoviesViewModel.onLikeStateClicked(movieItem)
+                upcomingMoviesViewModel.onLikeOrUnLikeClicked(movieItem)
             },
             onLongClickedListener = { movieItem ->
                 upcomingMoviesViewModel.onLongItemClicked(movieItem)
@@ -74,9 +76,15 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
                             binding.root
                         )
 
+                        is UpcomingEventHandler.UnlikeStateClicked -> {
+                            makeSnack(getString(R.string.item_successfully_deleted), binding.root)
+                        }
+
                         is UpcomingEventHandler.LongItemClicked -> {
                             // TODO: impl  LongItemClicked later
                         }
+
+
                     }
                 }
             }
@@ -103,7 +111,7 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
                 StateHolder.ERROR -> {
                     binding.tvNetworkFailed.visibility = View.VISIBLE
                     binding.progressBar.visibility = View.INVISIBLE
-                   binding.rvUpcomingMovie.visibility = View.INVISIBLE
+                    binding.rvUpcomingMovie.visibility = View.INVISIBLE
                 }
             }
         }
