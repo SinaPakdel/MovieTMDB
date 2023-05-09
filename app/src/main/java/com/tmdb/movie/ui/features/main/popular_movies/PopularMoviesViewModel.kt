@@ -1,16 +1,16 @@
 package com.tmdb.movie.ui.features.main.popular_movies
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
-import com.tmdb.movie.ui.model.MovieItem
 import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
+import com.tmdb.movie.ui.model.MovieItem
 import com.tmdb.movie.util.enums.StateHolder
 import com.tmdb.movie.util.safe_api.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -23,7 +23,7 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
     private val _stateHolder = MutableLiveData<StateHolder>().apply {
         StateHolder.LOADING
     }
-     val stateHolder: LiveData<StateHolder> = _stateHolder
+    val stateHolder: LiveData<StateHolder> = _stateHolder
 
     private val popularMoviesList = arrayListOf<MovieItem>()
     private val _popularMovies = MutableLiveData<List<MovieItem>>()
@@ -42,8 +42,14 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
     }
 
     private fun saveMovie(movieItem: MovieItem) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             repository.insertMovie(movieItem)
+        }
+    }
+
+    private fun deleteMovie(movieItem: MovieItem) {
+        viewModelScope.launch {
+            repository.deleteMovie(movieItem)
         }
     }
 
@@ -64,7 +70,7 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
         }
     }
 
-    private fun changeStateHolder(newState : StateHolder){
+    private fun changeStateHolder(newState: StateHolder) {
         _stateHolder.postValue(newState)
     }
 
@@ -81,9 +87,23 @@ class PopularMoviesViewModel @Inject constructor(private val repository: Reposit
         _popularEvent.send(PopularEvent.NavigateToDetailsScreen(id))
     }
 
-    fun onLikeStateClicked(movieItem: MovieItem) = viewModelScope.launch {
-        saveMovie(movieItem)
-        _popularEvent.send(PopularEvent.LikeStateClicked(movieItem))
+    fun onLikeOrUnLikeClicked(movieItem: MovieItem) = viewModelScope.launch {
+        when (movieItem.isSelect) {
+            false -> {
+                Log.e("LIKKK", "onLikeOrUnLikeClicked: L:IJKKKKK", )
+                saveMovie(movieItem)
+                _popularEvent.send(PopularEvent.LikeStateClicked(movieItem))
+            }
+
+            true -> {
+                Log.e("LIKKK", "onLikeOrUnLikeClicked: UNL:IJKKKKK", )
+
+                deleteMovie(movieItem)
+                _popularEvent.send(PopularEvent.UnlikeStateClicked(movieItem))
+            }
+        }
+
+
     }
 
     fun onLongItemMovieSelected(movieItem: MovieItem) = viewModelScope.launch {

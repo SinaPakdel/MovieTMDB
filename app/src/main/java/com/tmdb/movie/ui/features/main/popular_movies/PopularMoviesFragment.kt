@@ -41,7 +41,7 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
                     popularMoviesViewModel.onItemMovieSelected(movieId)
                 },
                 onLikeClicked = { movieItem ->
-                    popularMoviesViewModel.onLikeStateClicked(movieItem)
+                    popularMoviesViewModel.onLikeOrUnLikeClicked(movieItem)
                 },
                 onLongClickedListener = { movieItem ->
                     popularMoviesViewModel.onLongItemMovieSelected(movieItem)
@@ -74,9 +74,15 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
                             makeSnack(getString(R.string.item_successfully_added), binding.root)
                         }
 
+                        is PopularEvent.UnlikeStateClicked -> {
+                            makeSnack(getString(R.string.item_successfully_deleted), binding.root)
+                        }
+
                         is PopularEvent.LongItemMovieSelected -> {
                             // TODO: impl logic for longClickState like show fragmentDialog
                         }
+
+
                     }
                 }
             }

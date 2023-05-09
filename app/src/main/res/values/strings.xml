@@ -9,5 +9,6 @@
     <string name="movie_description">An Amazon princess comes to the world of Man in the grips of the First World War to confront the forces of evil and bring an end to human conflict.</string>
     <string name="rate_bar">Rate Bar</string>
     <string name="item_successfully_added">Movie Successfully Added to Favorite!!</string>
-    <string name="network_failed">Check your network or sth wrong with loading data...</string>
+    <string name="item_successfully_deleted">Movie Successfully Deleted as Favorite!!</string>
+    <string name="network_failed">Check your network or sth wrong with loading data…</string>
 </resources>
