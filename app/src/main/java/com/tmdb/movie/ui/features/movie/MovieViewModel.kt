@@ -19,13 +19,16 @@ class MovieViewModel @Inject constructor(
     private val repository: Repository,
     private val stateHandle: SavedStateHandle
 ) : ViewModel() {
+    companion object {
+        const val MOVIE_ID = "movieId"
+    }
 
     private val _stateHolder = MutableLiveData<StateHolder>().apply {
         StateHolder.LOADING
     }
     val stateHolder: LiveData<StateHolder> = _stateHolder
 
-    private val movieId = stateHandle.get<Int>("movieId")
+    private val movieId = stateHandle.get<Int>(MOVIE_ID)
 
     private val _movie = MutableLiveData<MovieDetailsItem>()
     val movie: LiveData<MovieDetailsItem> = _movie
