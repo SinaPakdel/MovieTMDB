@@ -27,7 +27,6 @@ inline fun <T> safeApiCall(
 ): Flow<T> = flow {
     val response = apiCall()
     try {
-        val response = apiCall()
         if (response.isSuccessful && response.body() != null) {
             emit(response.body()!!)
         } else {
