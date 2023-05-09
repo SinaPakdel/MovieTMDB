@@ -11,9 +11,10 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.tmdb.movie.R
 import com.tmdb.movie.databinding.FragmentPopularMoviesBinding
-import com.tmdb.movie.ui.adapter.EndlessRecyclerOnScrollListener
 import com.tmdb.movie.ui.adapter.MovieAdapter
 import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
 import com.tmdb.movie.util.enums.StateHolder
@@ -52,7 +53,7 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
                 layoutManager = GridLayoutManager(binding.root.context, 3)
             }
         }
-        setPaging()
+        setPagination()
         eventHandler()
         checkState()
         popularMoviesViewModel.popularMovies.observe(viewLifecycleOwner) {
@@ -94,15 +95,16 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
         _binding = null
     }
 
-    private fun setPaging() {
-        binding.rvPopularMovie.addOnScrollListener(object : EndlessRecyclerOnScrollListener(
-            binding.rvPopularMovie.layoutManager as GridLayoutManager,
-            20
-        ) {
-            override fun onLoadMore(currentPage: Int) {
-                popularMoviesViewModel.nextPage()
+    private fun setPagination() {
+        binding.rvPopularMovie.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                val layoutManager = recyclerView.layoutManager as GridLayoutManager
+                val lastPosition = layoutManager.findLastVisibleItemPosition()
+                if (lastPosition == movieAdapter.itemCount - 1) {
+                    popularMoviesViewModel.nextPage()
+                    movieAdapter.notifyDataSetChanged()
+                }
             }
-
         })
     }
 
