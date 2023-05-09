@@ -57,8 +57,8 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
 
     private fun observers() {
         upcomingMoviesViewModel.upcomingMovies.observe(viewLifecycleOwner) {
-            Log.e(TAG, "onViewCreated: $it")
             movieAdapter.submitList(it)
+            movieAdapter.notifyDataSetChanged()
         }
     }
 
@@ -69,7 +69,6 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
                 val lastPosition = layoutManager.findLastVisibleItemPosition()
                 if (lastPosition == movieAdapter.itemCount - 1) {
                     upcomingMoviesViewModel.nextPage()
-                    movieAdapter.notifyDataSetChanged()
                 }
             }
         })

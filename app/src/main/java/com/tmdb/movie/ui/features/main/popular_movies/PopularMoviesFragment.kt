@@ -57,8 +57,8 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
         eventHandler()
         checkState()
         popularMoviesViewModel.popularMovies.observe(viewLifecycleOwner) {
-            Log.e("LMNOP", "onViewCreated: ${it.size}")
             movieAdapter.submitList(it)
+            movieAdapter.notifyDataSetChanged()
         }
     }
 
@@ -102,7 +102,6 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
                 val lastPosition = layoutManager.findLastVisibleItemPosition()
                 if (lastPosition == movieAdapter.itemCount - 1) {
                     popularMoviesViewModel.nextPage()
-                    movieAdapter.notifyDataSetChanged()
                 }
             }
         })
