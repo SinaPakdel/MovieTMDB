@@ -55,7 +55,7 @@ class SelectedMoviesFragment : Fragment(R.layout.fragment_selected_movies) {
             selectedMoviesViewModel.selectedEventHandler.collect { event ->
                 when (event) {
                     is SelectedEventHandler.ItemClicked -> navController.navigate(
-                        SelectedMoviesFragmentDirections.actionGlobalMovieFragment(event.movieId)
+                        SelectedMoviesFragmentDirections.actionGlobalItemMovieBtmSheetDialog(event.movieId)
                     )
 
                     is SelectedEventHandler.LikeStateClicked -> {

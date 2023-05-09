@@ -64,7 +64,7 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
                 upcomingMoviesViewModel.upcomingEventHandler.collect { event ->
                     when (event) {
                         is UpcomingEventHandler.NavigateToDetailsScreen -> navController.navigate(
-                            UpcomingMoviesFragmentDirections.actionGlobalMovieFragment(
+                            UpcomingMoviesFragmentDirections.actionGlobalItemMovieBtmSheetDialog(
                                 event.id
                             )
                         )

@@ -11,15 +11,6 @@
         android:label="@string/title_upcoming"
         tools:layout="@layout/fragment_upcoming_movies" />
     <fragment
-        android:id="@+id/movieFragment"
-        android:name="com.tmdb.movie.ui.features.movie.MovieFragment"
-        android:label="fragment_movie"
-        tools:layout="@layout/fragment_movie">
-        <argument
-            android:name="movieId"
-            app:argType="integer" />
-    </fragment>
-    <fragment
         android:id="@+id/fragmentPopularMovies"
         android:name="com.tmdb.movie.ui.features.main.popular_movies.PopularMoviesFragment"
         android:label="@string/title_popular"
@@ -29,5 +20,16 @@
         android:name="com.tmdb.movie.ui.features.main.selected_movies.SelectedMoviesFragment"
         android:label="@string/title_selected"
         tools:layout="@layout/fragment_selected_movies" />
-    <action android:id="@+id/action_global_movieFragment" app:destination="@id/movieFragment" />
+    <dialog
+        android:id="@+id/itemMovieBtmSheetDialog"
+        android:name="com.tmdb.movie.ui.features.movie.MovieBtmSheetDialogFragment"
+        tools:layout="@layout/fragment_item_movie"
+        android:label="ItemMovieBtmSheetDialog" >
+        <argument
+            android:name="movieId"
+            app:argType="integer" />
+    </dialog>
+    <action
+        android:id="@+id/action_global_itemMovieBtmSheetDialog"
+        app:destination="@id/itemMovieBtmSheetDialog" />
 </navigation>
