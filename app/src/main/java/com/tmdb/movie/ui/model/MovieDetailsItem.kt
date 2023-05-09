@@ -1,6 +1,4 @@
-package com.tmdb.movie.model.ui
-
-import com.tmdb.movie.model.dto.details.Genre
+package com.tmdb.movie.ui.model
 
 
 data class MovieDetailsItem(

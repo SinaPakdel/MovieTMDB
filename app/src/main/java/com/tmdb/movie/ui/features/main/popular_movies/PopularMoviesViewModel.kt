@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
-import com.tmdb.movie.model.ui.MovieItem
+import com.tmdb.movie.ui.model.MovieItem
 import com.tmdb.movie.ui.features.main.popular_movies.events.PopularEvent
 import com.tmdb.movie.util.enums.StateHolder
 import com.tmdb.movie.util.safe_api.ResponseState

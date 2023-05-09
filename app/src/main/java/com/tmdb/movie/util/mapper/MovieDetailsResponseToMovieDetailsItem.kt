@@ -1,9 +1,9 @@
 package com.tmdb.movie.util.mapper
 
-import com.tmdb.movie.model.dto.details.Genre
-import com.tmdb.movie.model.dto.details.MovieDetailsResponse
-import com.tmdb.movie.model.ui.GenreItem
-import com.tmdb.movie.model.ui.MovieDetailsItem
+import com.tmdb.movie.data.remote.model.details.Genre
+import com.tmdb.movie.data.remote.model.details.MovieDetailsResponse
+import com.tmdb.movie.ui.model.GenreItem
+import com.tmdb.movie.ui.model.MovieDetailsItem
 
 fun MovieDetailsResponse.asMovieDetailsItem(): MovieDetailsItem {
     return MovieDetailsItem(

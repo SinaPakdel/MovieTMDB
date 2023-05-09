@@ -1,10 +1,9 @@
 package com.tmdb.movie.data.repository
 
-import android.util.Log
 import com.tmdb.movie.data.local.LocalDataSource
 import com.tmdb.movie.data.remote.RemoteDataSource
-import com.tmdb.movie.model.ui.MovieDetailsItem
-import com.tmdb.movie.model.ui.MovieItem
+import com.tmdb.movie.ui.model.MovieDetailsItem
+import com.tmdb.movie.ui.model.MovieItem
 import com.tmdb.movie.util.safe_api.ResponseState
 import com.tmdb.movie.util.safe_api.asResponseState
 import kotlinx.coroutines.flow.Flow

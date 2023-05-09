@@ -1,4 +1,4 @@
-package com.tmdb.movie.model.ui
+package com.tmdb.movie.ui.model
 
 data class GenreItem(
     val id: Int?,

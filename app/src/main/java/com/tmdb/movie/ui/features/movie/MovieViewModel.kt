@@ -6,7 +6,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tmdb.movie.data.repository.Repository
-import com.tmdb.movie.model.ui.MovieDetailsItem
+import com.tmdb.movie.ui.model.MovieDetailsItem
 import com.tmdb.movie.util.enums.StateHolder
 import com.tmdb.movie.util.safe_api.ResponseState
 import dagger.hilt.android.lifecycle.HiltViewModel
