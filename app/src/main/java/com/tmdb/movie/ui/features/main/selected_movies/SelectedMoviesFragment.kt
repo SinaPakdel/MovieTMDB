@@ -45,7 +45,7 @@ class SelectedMoviesFragment : Fragment(R.layout.fragment_selected_movies) {
         }
 
         selectedMoviesViewModel.selectedMovies.observe(viewLifecycleOwner) {
-            movieAdapter.submitList(it)
+            movieAdapter.submitList(it.toMutableList())
         }
 
     }

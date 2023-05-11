@@ -57,8 +57,7 @@ class PopularMoviesFragment : Fragment(R.layout.fragment_popular_movies) {
         eventHandler()
         checkState()
         popularMoviesViewModel.popularMovies.observe(viewLifecycleOwner) {
-            movieAdapter.submitList(it)
-            movieAdapter.notifyDataSetChanged()
+            movieAdapter.submitList(it.toMutableList())
         }
     }
 

@@ -57,8 +57,7 @@ class UpcomingMoviesFragment : Fragment(R.layout.fragment_upcoming_movies) {
 
     private fun observers() {
         upcomingMoviesViewModel.upcomingMovies.observe(viewLifecycleOwner) {
-            movieAdapter.submitList(it)
-            movieAdapter.notifyDataSetChanged()
+            movieAdapter.submitList(it.toMutableList())
         }
     }
 
