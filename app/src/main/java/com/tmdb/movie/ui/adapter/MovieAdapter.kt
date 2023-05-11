@@ -27,7 +27,7 @@ class MovieAdapter(
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.apply {
-                setOnClickListener { getItem(adapterPosition).id?.let { id -> onclick(id) } }
+                setOnClickListener { getItem(absoluteAdapterPosition).id?.let { id -> onclick(id) } }
                 setOnLongClickListener {
                     onLongClickedListener(getItem(adapterPosition))
                     true
@@ -51,7 +51,7 @@ class MovieAdapter(
                     setOnClickListener {
                         item.isSelect = false
                         imgLike.visibility = View.VISIBLE
-                        onLikeClicked(getItem(adapterPosition))
+                        onLikeClicked(getItem(absoluteAdapterPosition))
                     }
                 }
             }
